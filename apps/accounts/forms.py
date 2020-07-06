@@ -121,6 +121,7 @@ class LoginForm(forms.Form):
         email = data.get("email")
         password = data.get("password")
         qs = User.objects.filter(email=email)
+        print(f'qs == {qs}')
         if qs.exists():
             # user email is registered, check active/
             not_active = qs.filter(is_active=False)
@@ -132,8 +133,10 @@ class LoginForm(forms.Form):
                         """.format(resend_link=link)
                 confirm_email = EmailActivation.objects.filter(email=email)
                 is_confirmable = confirm_email.confirmable().exists()
+                print(f'is_confirmable == {is_confirmable}')
                 if is_confirmable:
                     msg1 = "Please check your email to confirm your account or " + reconfirm_msg.lower()
+                    print(f'mark_safe(msg1) == {mark_safe(msg1)}')
                     raise forms.ValidationError(mark_safe(msg1))
                 email_confirm_exists = EmailActivation.objects.email_exists(email).exists()
                 if email_confirm_exists:

@@ -38,7 +38,9 @@
         <div class="card">
             <div class="body">
                 <p class="lead">Login to your account</p>
-                <form class="form-auth-small m-t-20" action="index.html">
+                {% include "./snippets/error_form_snippet.html" with form=LoginForm %}
+                <form method="post" class="form-auth-small m-t-20">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="id_email" class="control-label sr-only">Email</label>
                         <input type="email" name="email" class="form-control round" id="id_email" value="user@domain.com" placeholder="Email" required>
@@ -56,7 +58,7 @@
                     <button type="submit" class="btn btn-primary btn-round btn-block">LOGIN</button>
                     <div class="bottom">
                         <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
-                        <span>Don't have an account? <a href="#">Register</a></span>
+                        <span>Don't have an account? <a href="{% url 'register' %}">Register</a></span>
                     </div>
                 </form>
             </div>

@@ -50,6 +50,11 @@ SITE_ID = 1
 
 
 AUTH_USER_MODEL = 'accounts.User'
+LOGIN_URL = '/login/'
+LOGIN_URL_REDIRECT = '/'
+LOGOUT_URL = '/logout/'
+LOGOUT_REDIRECT_URL = '/login/'
+
 
 
 MIDDLEWARE = [
@@ -142,11 +147,47 @@ USE_TZ = True
 
 # *************************** OWN settings ***************************
 
-LOGIN_URL = '/login/'
-LOGIN_URL_REDIRECT = '/'
-LOGOUT_URL = '/logout/'
+
+# ############### Twilio SendGrid ###############
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# DEFAULT_FROM_EMAIL = 'ps96068@gmail.com' #sendgrig sender email
+#
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'apikey'
+# EMAIL_HOST_PASSWORD = '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'
 
 
+# EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+# FROM_EMAIL = 'ps96068@yahoo.com' # replace with your address
+# SENDGRID_API_KEY = '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'
+
+
+
+# need  django-sendgrid-v5
+
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+DEFAULT_FROM_EMAIL = 'ps96068@gmail.com' #sendgrig sender email
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+SENDGRID_ECHO_TO_STDOUT=True
+SENDGRID_API_KEY = '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'
+
+# ############### END Twilio SendGrid ###############
+
+# ######## MAILCHIMP settings ################
+
+MAILCHIMP_API_KEY           = "f278d3c1cd861d90f0fd6119d24f35f5-us10"
+MAILCHIMP_DATA_CENTER       = "us10"
+MAILCHIMP_EMAIL_LIST_ID     = "f3d2fd2988"
+
+# ######## END MAILCHIMP settings ################
+
+
+FORCE_SESSION_TO_ONE = False
+FORCE_INACTIVE_USER_ENDSESSION= False
 
 
 

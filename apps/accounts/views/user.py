@@ -130,42 +130,15 @@ class LoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
     default_next = '/'
 
     def form_valid(self, form):
+        print("form valid in LoginView")
         next_path = self.get_next_url()
         return redirect(next_path)
-        # request = self.request
-        # next_ = request.GET.get('next')
-        # next_post = request.POST.get('next')
-        # redirect_path = next_ or next_post or None
-        # # print(f"pana la email: {form.cleaned_data} ")
-        # email  = form.cleaned_data.get("username")
-        # # print(f"email: {email} ")
-        # password  = form.cleaned_data.get("password")
-        # # print(f"password: {password} ")
-        # # print(f"request: {request} ")
-        # user = authenticate(request, username=email, password=password)
-        # # print(f"pana la {user} :")
-        # if user is not None:
-        #     if not user.is_active:
-        #         messages.error(request, 'This user is inactive')
-        #         return super(LoginView, self).form_invalid(form)
-        #     login(request, user)
-        #     user_logged_in.send(user.__class__, instance=user, request=request)
-        #     try:
-        #         del request.session['guest_email_id']
-        #     except:
-        #         print(" tipa passs")
-        #         pass
-        #     if is_safe_url(redirect_path, request.get_host()):
-        #         return redirect(redirect_path)
-        #     else:
-        #         return redirect("/")
-        # return super(LoginView, self).form_invalid(form)
 
 
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'accounts/register.html'
-    success_url = '/login/'
+    success_url = '/'
 
 
 class UserDetailUpdateView(LoginRequiredMixin ,UpdateView):

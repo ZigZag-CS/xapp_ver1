@@ -12,7 +12,7 @@
                     <span class="icon-menu"></span>
                     <span class="icon-menu"></span>
                 </button>
-                <a href="#" class="navbar-brand"><img src="{% static 'home/img/logo.png' %}" alt=""></a>
+                <a href="#" class="navbar-brand"><img src="{% static 'pages/img/logo.png' %}" alt=""></a>
             </div>
             <div class="collapse navbar-collapse" id="main-navbar">
                 <ul class="navbar-nav mr-auto w-100 justify-content-end clearfix">
@@ -28,7 +28,7 @@
                     {% else %}
 {#                        <a class="btn btn-border" href="{% static '../html/page-login.html' %}">Login <span style="color: black;">or</span> Register </a>#}
 {#                        <a class="btn btn-border" href="#">SignIn <span style="color: black;">or</span> Register </a>#}
-                        <p class="btn btn-border"><a href="1">Login</a> <span style="color: red;">|</span> <a href="2">Register</a> </p>
+                        <p class="btn btn-border"><a href="{% url 'login' %}">Login</a> <span style="color: red;">|</span> <a href="{% url 'register' %}">Register</a> </p>
                     {% endif %}
                 </div>
             </div>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="img-thumb text-center wow fadeInUp" data-wow-delay="0.6s">
-                        <img class="img-fluid" src="{% static 'home/img/hero-1.png' %}" alt="">
+                        <img class="img-fluid" src="{% static 'pages/img/hero-1.png' %}" alt="">
                     </div>
                 </div>
             </div>

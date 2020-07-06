@@ -16,7 +16,7 @@ from .utils import random_string_generator, unique_key_generator
 
 DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 7)
 
-
+# ############# Custom User Models ##########################
 class UserManager(BaseUserManager):
 
     # aceasta metoda e strict legata de crearea utilizatorului si de REQUIRED_FIELDS din modelul utilizatorului
@@ -55,7 +55,6 @@ class UserManager(BaseUserManager):
                 is_admin=True
         )
         return user
-
 
 
 class User(AbstractBaseUser):
@@ -103,6 +102,8 @@ class User(AbstractBaseUser):
     # def is_active(self):
     #     return self.active
 
+
+# ############# END Custom User Models ##########################
 
 # ############# Activation email Models ##########################
 class EmailActivationQuerySet(models.query.QuerySet):
