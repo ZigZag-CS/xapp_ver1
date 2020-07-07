@@ -38,9 +38,10 @@
         <div class="card">
             <div class="body">
                 <p class="lead">Login to your account</p>
-                {% include "./snippets/error_form_snippet.html" with form=LoginForm %}
+
                 <form method="post" class="form-auth-small m-t-20">
                     {% csrf_token %}
+                    {{ form.non_field_errors }}
                     <div class="form-group">
                         <label for="id_email" class="control-label sr-only">Email</label>
                         <input type="email" name="email" class="form-control round" id="id_email" value="user@domain.com" placeholder="Email" required>

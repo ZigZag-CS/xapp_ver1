@@ -35,6 +35,7 @@
 
                 <form method="post" class="form-auth-small m-t-20" >
                     {% csrf_token %}
+                    {{ form.non_field_errors }}
 {#                    {{ form.as_p }}#}
                     <div class="form-group">
                         <input type="text" name="full_name" class="form-control round" placeholder="Full name" required id="id_full_name">

@@ -193,6 +193,7 @@ DEFAULT_FROM_EMAIL = 'ps96068@gmail.com' #sendgrig sender email
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 SENDGRID_ECHO_TO_STDOUT=True
 SENDGRID_API_KEY = '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'
+BASE_URL = 'http://127.0.0.1:8000'
 
 # ############### END Twilio SendGrid ###############
 

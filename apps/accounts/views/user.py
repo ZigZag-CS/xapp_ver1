@@ -9,6 +9,7 @@ from django.contrib import messages
 # from django.utils.decorators import method_decorator
 # from django.http import HttpResponse
 # from django.utils.safestring import mark_safe
+from django.contrib.auth.views import *
 
 from django.views.generic import CreateView, FormView, DetailView, View, UpdateView
 from django.shortcuts import render, redirect
@@ -46,7 +47,7 @@ class AccountEmailActivateView(FormMixin, View):
     form_class = ReactivateEmailForm
     key = None
 
-    def get(self, request, key, *args, **kwargs):
+    def get(self, request, key=None, *args, **kwargs):
         self.key = key
         if key is not None:
             qs = EmailActivation.objects.filter(key__iexact=key)
@@ -209,3 +210,9 @@ class UserDetailUpdateView(LoginRequiredMixin ,UpdateView):
 #         form.save()
 #     return render(request, "accounts/register1.html", context)
 #
+
+
+class MyPasswordChangeView(PasswordChangeView):
+    template_name = 'accounts/registration/password_change_form.html'
+    success_url = reverse_lazy('login')
+

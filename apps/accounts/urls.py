@@ -4,6 +4,7 @@ from django.urls import path, re_path
 from apps.accounts.views import user, client, traider
 
 
+
 app_name = "account"
 
 urlpatterns = [

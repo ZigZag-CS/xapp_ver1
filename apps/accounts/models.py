@@ -11,7 +11,8 @@ from django.template.loader import get_template
 from django.urls import reverse
 from django.utils import timezone
 
-from .utils import random_string_generator, unique_key_generator
+from .utils import *
+
 # send_mail(subject, message, from_email, recipient_list, html_message)
 
 DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 7)
@@ -143,6 +144,7 @@ class EmailActivation(models.Model):
     user            = models.ForeignKey(User, on_delete=models.CASCADE)
     email           = models.EmailField()
     key             = models.CharField(max_length=120, blank=True, null=True)
+    activation_link             = models.URLField(blank=True, null=True)
     activated       = models.BooleanField(default=False)
     forced_expired  = models.BooleanField(default=False)
     expires         = models.IntegerField(default=7) # 7 Days
@@ -171,6 +173,8 @@ class EmailActivation(models.Model):
             self.activated = True
             self.save()
             return True
+        self.activation_link = "None"
+        self.save()
         return False
 
     def regenerate(self):
@@ -183,9 +187,12 @@ class EmailActivation(models.Model):
     def send_activation(self):
         if not self.activated and not self.forced_expired:
             if self.key:
-                base_url = getattr(settings, 'BASE_URL', 'https://www.pythonecommerce.com')
-                key_path = reverse("account:email-activate", kwargs={'key': self.key}) # use reverse
-                path = f"{base_url}{key_path}"
+                # base_url = getattr(settings, 'BASE_URL', 'https://www.pythonecommerce.com')
+                # print(f'base_url = {getattr(settings, "BASE_URL", "Vasea")}')
+                # key_path = reverse("account:email-activate", kwargs={'key': self.key}) # use reverse
+                # path = f"{base_url}{key_path}"
+                path = self.activation_link
+
                 context = {
                     'path': path,
                     'email': self.email
@@ -214,6 +221,7 @@ def pre_save_email_activation(sender, instance, *args, **kwargs):
     if not instance.activated and not instance.forced_expired:
         if not instance.key:
             instance.key = unique_key_generator(instance)
+            instance.activation_link = unique_url_generator(instance)
 
 pre_save.connect(pre_save_email_activation, sender=EmailActivation)
 

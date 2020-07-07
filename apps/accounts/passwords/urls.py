@@ -2,9 +2,11 @@
 from django.urls import path, re_path
 from django.contrib.auth import views as auth_views
 
+from apps.accounts.views import user, client, traider
+
 urlpatterns  = [
         path('password/change/',
-                auth_views.PasswordChangeView.as_view(),
+                user.MyPasswordChangeView.as_view(),
                 name='password_change'),
         path('password/change/done/',
                 auth_views.PasswordChangeDoneView.as_view(),
